@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.ProjectMenu">
+   <children>
+      <Label alignment="CENTER" layoutX="297.0" layoutY="25.0" text="Projects &amp; Tasks">
+         <font>
+            <Font name="Arial" size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="newProjectButton" layoutX="638.0" layoutY="19.0" mnemonicParsing="false" onAction="#NewProject" prefHeight="60.0" prefWidth="202.0" text="Create New Project">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="confirmationLabel" layoutX="325.0" layoutY="87.0" text="Project has been created!" textFill="#00ff26" visible="false">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelOne" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="142.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefHeight="50.0" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="143.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelThree" alignment="CENTER" contentDisplay="CENTER" layoutX="448.0" layoutY="143.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFour" alignment="CENTER" contentDisplay="CENTER" layoutX="638.0" layoutY="143.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFive" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="244.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelSix" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="244.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="448.0" layoutY="244.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelEight" alignment="CENTER" contentDisplay="CENTER" layoutX="638.0" layoutY="244.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNine" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="344.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTen" alignment="CENTER" contentDisplay="CENTER" layoutX="448.0" layoutY="344.0" onMouseClicked="#OnProjectClick" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefWidth="190.0" text="Label" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="30.0" onMouseClicked="#GoBack" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" text="Main Menu">
+         <font>
+            <Font name="System Italic" size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
