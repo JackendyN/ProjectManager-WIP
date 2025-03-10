@@ -10,10 +10,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class SaveLoadProjects {
+	
+	static File file = new File("projects.bin");
 
-	public static void SaveProjects(ArrayList<Project> projects, File projectFile) {
+	public static void SaveProjects(ArrayList<Project> projects) {
 		try {
-			FileOutputStream outputStream = new FileOutputStream(projectFile);
+			FileOutputStream outputStream = new FileOutputStream(file);
 			ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
 			
 			for (Project p : projects) {
@@ -28,11 +30,11 @@ public class SaveLoadProjects {
 		}
 	}
 	
-	public static ArrayList<Project> LoadProjects(File projectFile) {
+	public static ArrayList<Project> LoadProjects() {
 		ArrayList<Project> currentList = new ArrayList<Project>();
 		
 		try {
-			FileInputStream fin = new FileInputStream(projectFile);
+			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			Object object;
 			
@@ -58,6 +60,10 @@ public class SaveLoadProjects {
 		}
 		
 		return currentList;
+	}
+	
+	public static File GetFile() {
+		return file;
 	}
 	
 }

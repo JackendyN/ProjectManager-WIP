@@ -3,6 +3,7 @@ package com.project;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,20 +53,11 @@ public class ProjectMenu {
 			return;
 		}
 		
-		projectList = SaveLoadProjects.LoadProjects(file);
+		projectList = SaveLoadProjects.LoadProjects();
 	}
 	
 	void CreateProjectLabels() {
-		labelList.add(labelOne);
-		labelList.add(labelTwo);
-		labelList.add(labelThree);
-		labelList.add(labelFour);
-		labelList.add(labelFive);
-		labelList.add(labelSix);
-		labelList.add(labelSeven);
-		labelList.add(labelEight);
-		labelList.add(labelNine);
-		labelList.add(labelTen);
+		Collections.addAll(labelList, labelOne, labelTwo, labelThree, labelFour, labelFive, labelSix, labelSeven, labelEight, labelNine, labelTen);
 		
 		for (Project p : projectList) {
 			Label currentLabel = labelList.get(projectList.indexOf(p));

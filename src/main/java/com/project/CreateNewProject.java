@@ -1,6 +1,5 @@
 package com.project;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -60,11 +59,10 @@ public class CreateNewProject {
 		
 		Project newProject = new Project();
 		ArrayList<Project> currentProjects = new ArrayList<Project>();
-		File file = new File("projects.bin");
 		Alert a = new Alert(AlertType.ERROR);
 		
-		if(file.exists()) { 
-			currentProjects = SaveLoadProjects.LoadProjects(file);
+		if(SaveLoadProjects.GetFile().exists()) { 
+			currentProjects = SaveLoadProjects.LoadProjects();
 		}
 		
 		if(currentProjects.size() >= 10) {
@@ -101,7 +99,7 @@ public class CreateNewProject {
 		}
 		
 		currentProjects.add(newProject);
-		SaveLoadProjects.SaveProjects(currentProjects, file);
+		SaveLoadProjects.SaveProjects(currentProjects);
 		
         root = loader.load();
 		

@@ -39,5 +39,41 @@
       <Button fx:id="okButton" layoutX="239.0" layoutY="158.0" mnemonicParsing="false" onAction="#EditProperty" text="OK" visible="false" />
       <Button fx:id="cancelButton" layoutX="285.0" layoutY="158.0" mnemonicParsing="false" onAction="#CancelEdit" text="CANCEL" visible="false" />
       <DatePicker fx:id="editDateField" layoutX="335.0" layoutY="184.0" visible="false" />
+      <Label layoutX="649.0" layoutY="96.0" text="Tasks:">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskOne" alignment="CENTER" layoutX="595.0" layoutY="169.0" onMouseEntered="#TaskHover" onMouseExited="#TaskUnhover" prefHeight="30.0" prefWidth="191.0" text="Task1" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskTwo" alignment="CENTER" layoutX="595.0" layoutY="230.0" onMouseEntered="#TaskHover" onMouseExited="#TaskUnhover" prefHeight="30.0" prefWidth="191.0" text="Task2" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskThree" alignment="CENTER" layoutX="595.0" layoutY="292.0" onMouseEntered="#TaskHover" onMouseExited="#TaskUnhover" prefHeight="30.0" prefWidth="191.0" text="Task3" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskView" layoutX="596.0" layoutY="358.0" onMouseClicked="#ViewTasks" onMouseEntered="#TaskHover" onMouseExited="#TaskUnhover" text="View Project Tasks" visible="false">
+         <font>
+            <Font name="System Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskDescription" alignment="CENTER" layoutX="408.0" layoutY="385.0" prefHeight="18.0" prefWidth="376.0" text="(Task Description)" visible="false" />
+      <Button layoutX="626.0" layoutY="18.0" mnemonicParsing="false" onAction="#CreateNewTask" prefHeight="46.0" prefWidth="129.0" text="Create New Task">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteButton" layoutX="369.0" layoutY="431.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="46.0" prefWidth="156.0" text="DELETE PROJECT">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -1,7 +1,11 @@
 package com.project;
 
-public class Task {
+import java.io.Serializable;
 
+@SuppressWarnings("serial")
+public class Task implements Serializable{
+
+	public String name;
 	public String description;
 	public Boolean isDone;
 	
