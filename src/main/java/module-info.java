@@ -1,8 +1,7 @@
 module com.project {
-    requires transitive javafx.controls;
+    requires javafx.controls;
     requires javafx.fxml;
-    requires transitive javafx.graphics;
-	requires javafx.base;
+    requires javafx.graphics;
 
     opens com.project to javafx.fxml;
     exports com.project;
