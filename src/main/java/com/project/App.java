@@ -19,7 +19,7 @@ public class App extends Application {
         Image icon = new Image(getClass().getResourceAsStream("clockicon.png"));
         stage.getIcons().add(icon);
 
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("Time Manager");
         stage.setScene(scene);
         stage.show();
