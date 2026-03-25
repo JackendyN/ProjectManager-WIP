@@ -17,5 +17,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="373.0" layoutY="252.0" mnemonicParsing="false" onAction="#SwitchToTime" prefHeight="50.0" prefWidth="149.0" text="Time Blocking">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

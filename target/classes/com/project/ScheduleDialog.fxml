@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <header>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="480.0">
+         <children>
+            <Label layoutX="115.0" layoutY="35.0" text="Start Time:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="startField" layoutX="240.0" layoutY="38.0" promptText="Example: 08:00 AM" />
+            <TextField fx:id="endField" layoutX="240.0" layoutY="87.0" promptText="Example: 08:00 AM" />
+            <Label layoutX="122.0" layoutY="84.0" text="End Time:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ColorPicker fx:id="colorField" layoutX="240.0" layoutY="186.0" />
+            <Label layoutX="103.0" layoutY="183.0" text="Block Color:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="49.0" layoutY="237.0" text="Project (Optional):">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="projectField" layoutX="239.0" layoutY="239.0" prefWidth="150.0" />
+            <TextField fx:id="descriptionField" layoutX="240.0" layoutY="135.0" />
+            <Label layoutX="103.0" layoutY="132.0" text="Description:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+    </header>
+    <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </content>
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+</DialogPane>
