@@ -14,7 +14,7 @@ public class MainScreen {
     }
 	
 	public void SwitchToTime(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TimeMainScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DailySchedule.fxml"));
         SceneManager.SwitchToScene(loader, (Node)e.getSource());
     }
 }

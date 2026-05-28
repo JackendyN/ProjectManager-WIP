@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.ScheduleView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.ScheduleView">
    <children>
       <Rectangle fx:id="baseRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="144.0" layoutY="207.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" width="608.0" />
       <Rectangle fill="DODGERBLUE" height="200.0" layoutX="144.0" layoutY="207.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -37,6 +37,11 @@
       <Label fx:id="errorLabel" layoutX="202.0" layoutY="160.0" text="No schedule exists for this day. Click to create one." textFill="RED" visible="false">
          <font>
             <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="32.0" onMouseClicked="#GoBack" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" text="Main Menu">
+         <font>
+            <Font size="25.0" />
          </font>
       </Label>
    </children>

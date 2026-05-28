@@ -21,7 +21,7 @@ public class Schedule implements Serializable {
 		if(timeBlocks.isEmpty()) {
 			timeBlocks.add(block);
 		} else {
-			Boolean found = false;
+			boolean found = false;
 			for (TimeBlock tr : timeBlocks) {
 				if(block.timeStart < tr.timeStart && !tr.inRange(block.timeEnd)) {
 					timeBlocks.add(timeBlocks.indexOf(tr), block);
@@ -36,17 +36,6 @@ public class Schedule implements Serializable {
 				System.out.println("Range could not be added");
 			}
 			
-		}
-	}
-	
-	public void ToString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.US);
-		LocalTime startTime;
-		LocalTime endTime;
-		for (TimeBlock timeRange : timeBlocks) {
-			startTime = LocalTime.of((timeRange.timeStart / 60), (timeRange.timeStart % 60));
-			endTime = LocalTime.of((timeRange.timeEnd / 60), (timeRange.timeEnd % 60));
-			System.out.println(startTime.format(formatter) + " - " + endTime.format(formatter) + ": " + timeRange.timeDescription);
 		}
 	}
 	

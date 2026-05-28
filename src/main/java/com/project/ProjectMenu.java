@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 
-public class ProjectMenu {
+public class ProjectMenu extends OptionScreen {
 	
 	Parent root;
 	
@@ -65,12 +65,11 @@ public class ProjectMenu {
 			currentLabel.setText(p.projectName);
 		}
 	}
-	
-	Label hoverLabel;
+
 	public void OnProjectClick(MouseEvent mEvent) throws IOException {
-		Boolean projectFound = false;
+		boolean projectFound = false;
 		for (Project proj : projectList) {
-			if(proj.projectName == hoverLabel.getText()) {
+			if(proj.projectName.equals(hoverLabel.getText())) {
 				projectFound = true;
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("ProjectView.fxml"));
 		        root = loader.load();
@@ -86,17 +85,6 @@ public class ProjectMenu {
 	
 	public void CreatedProjectText() {
 		confirmationLabel.setVisible(true);
-	}
-	
-	
-	public void LabelHover(MouseEvent e) {
-		hoverLabel = (Label)e.getTarget();
-		hoverLabel.setUnderline(true);
-	}
-	
-	public void LabelUnhover(MouseEvent e) {
-		hoverLabel.setUnderline(false);
-		hoverLabel = null;
 	}
 	
 	public void GoBack(MouseEvent eBack) throws IOException {

@@ -24,11 +24,12 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class ScheduleView {
+public class ScheduleView extends OptionScreen {
 	
 	// Base X: 144
 	// Rectangle Width: 608
@@ -100,7 +101,7 @@ public class ScheduleView {
 			newRectangle.setOnMouseEntered(event -> {
 				descriptionLabel.setVisible(true);
 				descriptionLabel.setLayoutX(newRectangle.getLayoutX() - (newRectangle.getLayoutX() / 4));
-				descriptionLabel.setText(block.ToString());
+				descriptionLabel.setText(block.toString());
 			});
 			
 			newRectangle.setOnMouseClicked(event -> {
@@ -156,7 +157,7 @@ public class ScheduleView {
 		
 		Optional<ButtonType> button = dialog.showAndWait();
 		if(button.isPresent() && button.get() == ButtonType.OK) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 			try {
 				LocalTime blockStart = LocalTime.parse(startField.getText(), formatter);
 				LocalTime blockEnd = LocalTime.parse(endField.getText(), formatter);
@@ -180,6 +181,12 @@ public class ScheduleView {
 					errorLabel.setText("The time block was not able to be added.");
 				}
 				
+			} catch (TimeRangeException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Invalid Time Range");
+				alert.setContentText("Please make sure that you have entered appropriate start and end times.");
+				alert.showAndWait();
+
 			} catch (Exception e) {
 				System.err.print(e);
 				Alert alert = new Alert(AlertType.ERROR);
@@ -234,6 +241,12 @@ public class ScheduleView {
 		}
 		
 		return currentList;
+	}
+
+	public void GoBack() throws IOException {
+		hoverLabel = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+		SceneManager.SwitchToScene(loader, descriptionLabel);
 	}
 	
 }

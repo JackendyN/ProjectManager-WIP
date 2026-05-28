@@ -17,22 +17,20 @@ public class TimeBlock implements Serializable {
 		int timeEnd = 0;
 		SerializableColor blockColor;
 		
-		public TimeBlock(int start, int end, String description, Color color) {
+		public TimeBlock(int start, int end, String description, Color color) throws TimeRangeException {
 			
 			timeDescription = description;
 			blockColor = new SerializableColor(color);
 			
 			if(start < 0 || end > 1440) {
-				System.out.println("Invalid Time Range.");
-				return;
+				throw new TimeRangeException();
 			}
 			
 			timeStart = start;
 			if(end > start) {
 				timeEnd = end;
 			} else {
-				System.out.println("Invalid time range. End time was automatically assigned to an hour after the start time.");
-				timeEnd = end + 60;
+				throw new TimeRangeException();
 			}
 			
 		}
@@ -40,8 +38,9 @@ public class TimeBlock implements Serializable {
 		public Boolean inRange(int number) {
 			return (number >= timeStart) && (number <= timeEnd);
 		}
-		
-		public String ToString() {
+
+		@Override
+		public String toString() {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.US);
 			LocalTime startTime;
 			LocalTime endTime;

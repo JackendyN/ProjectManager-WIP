@@ -1,6 +1,7 @@
 package com.project;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ProjectView {
 			projectLabel.setText(selectedProject.projectName + " (" + selectedProject.type + ")");
 		}
 		
-		hourLabel.setText("Estimated Time: " + Integer.toString(selectedProject.estimatedHours) + " Hours");
+		hourLabel.setText("Estimated Time: " + selectedProject.estimatedHours + " Hours");
 		
 		startDateLabel.setText("Start Date: " + formatter.format(selectedProject.startDate));
 		if(selectedProject.deadLine == null) {
@@ -148,8 +149,8 @@ public class ProjectView {
 		} else if(lastLabel == startDateLabel) {
 			try {
 				currentProject.startDate = editDateField.getValue();
-;				startDateLabel.setText("Start Date: " + formatter.format(currentProject.startDate));
-			} catch (Exception e) {
+				startDateLabel.setText("Start Date: " + formatter.format(currentProject.startDate));
+			} catch (DateTimeException e) {
 				alert.setTitle("Invalid Date");
 				alert.setContentText("Please put the date in the correct format.");
 				alert.showAndWait();
@@ -161,7 +162,7 @@ public class ProjectView {
 			try {
 				currentProject.deadLine = editDateField.getValue();
 				endDateLabel.setText("Deadline: " + formatter.format(currentProject.deadLine));
-			} catch (Exception e) {
+			} catch (DateTimeException e) {
 				alert.setTitle("Invalid Date");
 				alert.setContentText("Please put the date in the correct format.");
 				alert.showAndWait();
@@ -253,9 +254,13 @@ public class ProjectView {
 	public void LabelHover(MouseEvent e) {
 		hoverLabel = (Label)e.getTarget();
 		hoverLabel.setUnderline(true);
-		if(hoverLabel == projectLabel || hoverLabel == hourLabel || hoverLabel == startDateLabel || hoverLabel == endDateLabel) {
+		if(hoverLabel == hourLabel || hoverLabel == startDateLabel || hoverLabel == endDateLabel) {
 			editLabel.setLayoutX(hoverLabel.getLayoutX());
 			editLabel.setLayoutY(hoverLabel.getLayoutY() + 40);
+			editLabel.setVisible(true);
+		} else if(hoverLabel == projectLabel) {
+			editLabel.setLayoutX(406);
+			editLabel.setLayoutY(15);
 			editLabel.setVisible(true);
 		}
 	}
