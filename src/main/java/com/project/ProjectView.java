@@ -239,15 +239,22 @@ public class ProjectView {
 	void SetTasks() {
 		ArrayList<Label> taskLabels = new ArrayList<Label>();
 		Collections.addAll(taskLabels, taskOne, taskTwo, taskThree);
-		
+		int j = 0;
 		for (int i = 0; i < currentProject.projectTasks.size(); i++) {
-			taskLabels.get(i).setVisible(true);
-			taskLabels.get(i).setText(currentProject.projectTasks.get(i).name);
+
 			if(i == 1) {
 				taskView.setVisible(true);
-			} else if(i == 2) {
+			} else if(i == 3) {
 				break;
 			}
+
+			String taskName = currentProject.projectTasks.get(i).name;
+			if(taskName.contains("(DONE)")) continue;
+
+			taskLabels.get(j).setVisible(true);
+			taskLabels.get(j).setText(taskName);
+			j++;
+
 		}
 	}
 	
@@ -310,7 +317,7 @@ public class ProjectView {
         SceneManager.SwitchToScene(root, loader, (Node)vTasks.getSource());
 	}
 	
-	public void GoBack(MouseEvent pBack) throws IOException {
+	public void GoBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Projects.fxml"));
 		SceneManager.SwitchToScene(loader, endDateLabel);
 	}

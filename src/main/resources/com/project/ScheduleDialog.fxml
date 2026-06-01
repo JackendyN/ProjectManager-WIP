@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
     <header>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="480.0">
          <children>
@@ -17,9 +17,15 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="startField" layoutX="240.0" layoutY="38.0" promptText="Example: 08:00 AM" />
-            <TextField fx:id="endField" layoutX="240.0" layoutY="87.0" promptText="Example: 08:00 AM" />
+            <TextField fx:id="startField" layoutX="240.0" layoutY="38.0" promptText="Example: 8:00 AM" />
+            <TextField fx:id="endField" layoutX="240.0" layoutY="87.0" promptText="Example: 8:00 AM" />
+            <TextField fx:id="descriptionField" layoutX="240.0" layoutY="135.0" />
             <Label layoutX="122.0" layoutY="84.0" text="End Time:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="132.0" text="Description:">
                <font>
                   <Font size="20.0" />
                </font>
@@ -36,12 +42,6 @@
                </font>
             </Label>
             <ComboBox fx:id="projectField" layoutX="239.0" layoutY="239.0" prefWidth="150.0" />
-            <TextField fx:id="descriptionField" layoutX="240.0" layoutY="135.0" />
-            <Label layoutX="103.0" layoutY="132.0" text="Description:">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
          </children></AnchorPane>
     </header>
     <content>

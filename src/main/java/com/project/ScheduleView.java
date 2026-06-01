@@ -9,20 +9,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -38,6 +32,17 @@ public class ScheduleView extends OptionScreen {
 	@FXML public Label descriptionLabel;
 	@FXML public Label scheduleEmptyLabel;
 	@FXML public DatePicker dateField;
+	@FXML public Label minimumTimeLabel;
+	@FXML public TextField minimumField;
+	@FXML public Label maximumTimeLabel;
+	@FXML public TextField maximumField;
+	@FXML public Button okMinimum;
+	@FXML public Button cancelMinimum;
+	@FXML public Button okMaximum;
+	@FXML public Button cancelMaximum;
+	int minimumMinute = 0;
+	int maximumMinute = 1440;
+	DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
 	Schedule currentSchedule = null;
 	ArrayList<Schedule> scheduleList;
 	ArrayList<Rectangle> currentBlocks = new ArrayList<Rectangle>();
@@ -82,7 +87,9 @@ public class ScheduleView extends OptionScreen {
 	}
 	
 	public void SetSchedule(Schedule schedule) {
-		final float scale = (float)baseRectangle.getWidth() / 1440;
+		int totalTime = maximumMinute - minimumMinute;
+		int distanceFromStart = minimumMinute;
+		float scale = (float)baseRectangle.getWidth() / totalTime;
 		final double baseX = baseRectangle.getLayoutX();
 		AnchorPane pane = (AnchorPane)baseRectangle.getParent(); 
 		ClearBlocks(pane);
@@ -93,10 +100,17 @@ public class ScheduleView extends OptionScreen {
 			currentBlocks.add(newRectangle);
 			newRectangle.setLayoutY(baseRectangle.getLayoutY());
 			newRectangle.setHeight(baseRectangle.getHeight());
-			
-			newRectangle.setWidth(((float)block.timeEnd - (float)block.timeStart) * scale);
+
+			float startPoint = (float)block.timeStart - distanceFromStart;
+			float startDiff = 0;
+			if(startPoint < 0) {
+				startDiff = Math.abs(startPoint);
+				startPoint = 0;
+			}
+			float widthEnd = Math.min((float)block.timeEnd, maximumMinute);
+			newRectangle.setWidth((widthEnd - (float)block.timeStart - startDiff) * scale);
 			newRectangle.setFill(block.blockColor.getColor());
-			newRectangle.setLayoutX(baseX + ((float)block.timeStart * scale));
+			newRectangle.setLayoutX(baseX + (startPoint * scale));
 			
 			newRectangle.setOnMouseEntered(event -> {
 				descriptionLabel.setVisible(true);
@@ -105,15 +119,95 @@ public class ScheduleView extends OptionScreen {
 			});
 			
 			newRectangle.setOnMouseClicked(event -> {
-				currentSchedule.timeBlocks.remove(block);
-				scheduleList.add(currentSchedule);
-				SaveSchedules(scheduleList);
-				SetSchedule(currentSchedule);
+				Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+				confirmAlert.setTitle("Block Removal");
+				confirmAlert.setHeaderText("Removing time block.");
+				confirmAlert.setContentText("Are you sure you want to delete " + block + "?");
+
+				Optional<ButtonType> buttonType = confirmAlert.showAndWait();
+				if(buttonType.isPresent() && buttonType.get().equals(ButtonType.OK)) {
+					currentSchedule.timeBlocks.remove(block);
+					SaveSchedules(scheduleList);
+					SetSchedule(currentSchedule);
+				}
 			});
 			
 			newRectangle.setOnMouseExited(event -> descriptionLabel.setVisible(false));
 			
 		}
+	}
+
+	public void ShowTimeField(MouseEvent e) {
+		Label label = (Label)e.getSource();
+		TextField field;
+		Button ok;
+		Button cancel;
+		if(label.equals(minimumTimeLabel)) {
+			field = minimumField;
+			ok = okMinimum;
+			cancel = cancelMinimum;
+		} else if(label.equals(maximumTimeLabel)) {
+			field = maximumField;
+			ok = okMaximum;
+			cancel = cancelMaximum;
+		} else {
+			return;
+		}
+		field.setVisible(true);
+		field.setText(label.getText());
+		ok.setVisible(true);
+		cancel.setVisible(true);
+		cancel.setOnMouseClicked(event -> {
+			field.setVisible(false);
+			ok.setVisible(false);
+			cancel.setVisible(false);
+		});
+	}
+
+	public void UpdateTime(MouseEvent e) {
+		TextField timeField;
+		boolean changingMinimum;
+		if(e.getSource().equals(okMinimum)) {
+			timeField = minimumField;
+			changingMinimum = true;
+		} else if(e.getSource().equals(okMaximum)) {
+			timeField = maximumField;
+			changingMinimum = false;
+		} else {
+			return;
+		}
+
+		LocalTime newTime;
+		int newMinutes;
+		try {
+			newTime = LocalTime.parse(timeField.getText(), timeFormatter);
+			newMinutes = (newTime.getHour() * 60) + newTime.getMinute();
+			if((changingMinimum && newMinutes > maximumMinute) || !changingMinimum && newMinutes < minimumMinute) {
+				throw new TimeRangeException();
+			}
+		} catch(DateTimeParseException | TimeRangeException te) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Invalid Time");
+			alert.setContentText("Please make sure that you have entered an appropriate time.");
+			alert.showAndWait();
+			return;
+		}
+
+		if(changingMinimum) {
+			minimumMinute = newMinutes;
+			minimumTimeLabel.setText(timeField.getText());
+			okMinimum.setVisible(false);
+			cancelMinimum.setVisible(false);
+			minimumField.setVisible(false);
+		} else {
+			maximumMinute = newMinutes;
+			maximumTimeLabel.setText(timeField.getText());
+			okMaximum.setVisible(false);
+			cancelMaximum.setVisible(false);
+			maximumField.setVisible(false);
+		}
+		SetSchedule(currentSchedule);
+
 	}
 	
 	void ClearBlocks(AnchorPane pane) {
@@ -164,19 +258,18 @@ public class ScheduleView extends OptionScreen {
 				String blockDescription = descriptionField.getText();
 				Color blockColor = colorField.getValue();
 				TimeBlock block = new TimeBlock(blockStart.toSecondOfDay() / 60, blockEnd.toSecondOfDay() / 60, blockDescription, blockColor);
+				int previousSize = currentSchedule.timeBlocks.size();
+				currentSchedule.AddRange(block);
 				if(projectField != null) { 
 					block.projectName = projectField.getValue();
 				} 
-				int previousSize = currentSchedule.timeBlocks.size();
-				currentSchedule.AddRange(block);
-				
+
 				if(currentSchedule.timeBlocks.size() != previousSize) {
 					errorLabel.setVisible(false);
-					scheduleList.add(currentSchedule);
 					SaveSchedules(scheduleList);
 					SetSchedule(currentSchedule);
 					System.out.println("Done!");
-				} else {
+				} else { // Fail-safe
 					errorLabel.setVisible(true);
 					errorLabel.setText("The time block was not able to be added.");
 				}

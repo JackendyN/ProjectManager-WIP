@@ -13,8 +13,8 @@ public class TimeBlock implements Serializable {
 	// In Minutes
 		String timeDescription;
 		public String projectName = null;
-		int timeStart = 0;
-		int timeEnd = 0;
+		int timeStart;
+		int timeEnd;
 		SerializableColor blockColor;
 		
 		public TimeBlock(int start, int end, String description, Color color) throws TimeRangeException {
@@ -36,7 +36,7 @@ public class TimeBlock implements Serializable {
 		}
 		
 		public Boolean inRange(int number) {
-			return (number >= timeStart) && (number <= timeEnd);
+			return (number >= timeStart) && (number < timeEnd);
 		}
 
 		@Override

@@ -19,11 +19,6 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Label fx:id="startDateLabel" layoutX="76.0" layoutY="245.0" onMouseClicked="#StartEdit" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefHeight="34.0" prefWidth="312.0" text="Start">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
       <Label fx:id="endDateLabel" accessibleText="Test" layoutX="76.0" layoutY="360.0" onMouseClicked="#StartEdit" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefHeight="34.0" prefWidth="312.0" text="End">
          <font>
             <Font size="23.0" />
@@ -34,7 +29,12 @@
             <Font name="System Italic" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="editLabel" layoutX="412.0" layoutY="60.0" text="(Click to Edit)" visible="false" />
+      <Label fx:id="startDateLabel" layoutX="76.0" layoutY="245.0" onMouseClicked="#StartEdit" onMouseEntered="#LabelHover" onMouseExited="#LabelUnhover" prefHeight="34.0" prefWidth="312.0" text="Start">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="editLabel" layoutX="406.0" layoutY="15.0" text="(Click to Edit)" />
       <TextField fx:id="editField" layoutX="76.0" layoutY="158.0" promptText="Revision" visible="false" />
       <Button fx:id="okButton" layoutX="239.0" layoutY="158.0" mnemonicParsing="false" onAction="#EditProperty" text="OK" visible="false" />
       <Button fx:id="cancelButton" layoutX="285.0" layoutY="158.0" mnemonicParsing="false" onAction="#CancelEdit" text="CANCEL" visible="false" />
